@@ -1,0 +1,11 @@
+<!-- templates/inventory/item_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>¿Quieres eliminar esto?"{{ object.name }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Si, eliminar</button>
+    <a href="{% url 'item_list' %}">Cancelar</a>
+  </form>
+{% endblock %}

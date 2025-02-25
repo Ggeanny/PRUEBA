@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <title>Lista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+            color: rgb(0, 66, 0);
+        }
+
+        a {
+            text-decoration: none;
+            color: green;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: darkgreen;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid rgb(2, 148, 2);
+            text-align: left;
+        }
+
+        th {
+            background-color: #e8f5e9;
+            color: green;
+        }
+
+        tr:hover {
+            background-color: #f1f8f5;
+        }
+
+        .actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista</h2>
+    <a href="{% url 'item_create' %}">Añadir</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Suplidor</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.supplier }}</td>
+                <td class="actions">
+                    <a href="{% url 'item_update' item.id %}">Editar</a>
+                    <a href="{% url 'item_delete' item.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">Elemento no encontrado</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}
